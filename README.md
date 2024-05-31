@@ -8,7 +8,7 @@ cd docker-fs
 sudo tar -c -p -f docker-fs.tar --exclude=/home --one-file-system /
 sudo tar xf docker-fs.tar
 ```
-The above instructions exclude the `/home` directory and the `--one-file-system` option ensures it does not cross filesystem boundaries. The `-p` flag preserves the file permissions in the archive and `/` specifies the root directory to be archived.
+The above instructions exclude the `/home` directory. If your filesystem is too big, your may need to remove some contents, but at least you should include `bin dev etc lib lib32 lib64 libx32 proc root run sbin usr` to ensure tiny-docker can run properly. The `--one-file-system` option ensures it does not cross filesystem boundaries. The `-p` flag preserves the file permissions in the archive and `/` specifies the root directory to be archived.
 
 Now the filesystem is ready. Enter `docker` or `dockerr` and run these commands:
 ```sh
@@ -26,7 +26,7 @@ which illustrates that the hostname is isolated.
 Then run `ls`:
 ```txt
 root@TinyDocker:/# ls
-bin  boot  dev  etc  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  docker-fs.tar  usr  var
+bin  boot  dev  docker-fs.tar  etc  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 which illustrates that the filesystem is isolated.
 
